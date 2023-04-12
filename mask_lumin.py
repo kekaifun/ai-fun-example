@@ -31,6 +31,8 @@ size = (width,height)
 
 input_point = np.array([[310, 150]])
 input_label = np.array([1])
+input_box = np.array([210, 40, 410, 350])
+
 
 #plt.figure(figsize=(10,10))
 
@@ -42,8 +44,9 @@ while success:
     # process image
     predictor.set_image(image)
     masks, scroes, logits = predictor.predict(
-        point_coords=input_point, 
-        point_labels=input_label,
+        point_coords=None,
+        point_labels=None,
+        box=input_box[None, :],
         multimask_output=True,
     )
     min_score = np.argmin(scroes)
